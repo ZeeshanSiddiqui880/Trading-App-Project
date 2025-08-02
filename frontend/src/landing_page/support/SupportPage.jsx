@@ -7,7 +7,7 @@ function SupportPage() {
       <Hero/>
       <CreateTicket/>
     </>
-  );
+   );
 }
 
 export default SupportPage;
