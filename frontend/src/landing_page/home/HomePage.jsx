@@ -1,5 +1,3 @@
-import Navbar from '../Navbar';
-import Footer from '../Footer';
 import OpenAccount from '../OpenAccount';
 import Hero from './Hero';
 import Awards from './Awards';
