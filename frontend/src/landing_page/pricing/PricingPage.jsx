@@ -9,7 +9,7 @@ function PricingPage() {
       <OpenAccount/>
       <Brokerage/>
     </> 
-  );
+   );
 }
 
 export default PricingPage; 
