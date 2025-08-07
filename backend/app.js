@@ -3,13 +3,15 @@ if (process.env.NODE_ENV != "production") {
 }
 
 const express = require("express");
-const app = express();
 const port = process.env.port || 8080;
 const mongoose = require("mongoose");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const dbUrl = process.env.MONGO_URL;
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
+const app = express();
 
 main()
   .then(() => {
@@ -22,6 +24,19 @@ main()
 async function main() {
   await mongoose.connect(dbUrl);
 }
+
+app.use(cors());
+app.use(bodyParser.json());
+
+app.get("/allHoldings", async (req, res) => {
+  let allHoldings = await HoldingsModel.find({});
+  res.json(allHoldings);
+});
+
+app.get("/allPositions", async (req, res) => {
+  let allPositions = await PositionsModel.find({});
+  res.json(allPositions);
+});
 
 // app.get("/addHoldings", async (req, res) => {
 //   let tempHoldings = [
@@ -148,7 +163,6 @@ async function main() {
 //   });
 //   res.send(`Done`);
 // });
-
 
 // app.get("/addPositions", async (req, res) => {
 //   let tempPositions = [
