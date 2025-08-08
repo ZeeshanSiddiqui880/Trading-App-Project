@@ -11,6 +11,8 @@ const bodyParser = require("body-parser");
 const dbUrl = process.env.MONGO_URL;
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
+const { OrdersModel } = require("./model/OrdersModel");
+
 const app = express();
 
 main()
@@ -36,6 +38,38 @@ app.get("/allHoldings", async (req, res) => {
 app.get("/allPositions", async (req, res) => {
   let allPositions = await PositionsModel.find({});
   res.json(allPositions);
+});
+
+app.post("/newOrder", async (req, res) => {
+  console.time("saveOrder");
+  try {
+    const newOrder = new OrdersModel({
+      name: req.body.name,
+      qty: req.body.qty,
+      price: req.body.price,
+      mode: req.body.mode,
+    });
+
+    await newOrder.save(); // ✅ wait for the DB operation to finish
+    res.status(201).send("✅ New order saved successfully.");
+  } catch (err) {
+    console.error("❌ Error saving order:", err);
+    res.status(500).send("❌ Failed to save order.");
+  }
+  console.timeEnd("saveOrder");
+});
+
+app.get("/allOrders", async (req, res) => {
+  let allOrders = await OrdersModel.find({});
+  res.json(allOrders);
+});
+
+app.get("/", (req, res) => {
+  res.send(`Backend`);
+});
+
+app.listen(port, () => {
+  console.log(`listening at ${port}`);
 });
 
 // app.get("/addHoldings", async (req, res) => {
@@ -202,11 +236,3 @@ app.get("/allPositions", async (req, res) => {
 //   });
 //   res.send(`Done added positions`);
 // });
-
-app.get("/", (req, res) => {
-  res.send(`Backend`);
-});
-
-app.listen(port, () => {
-  console.log(`listening at ${port}`);
-});
