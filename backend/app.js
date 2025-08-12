@@ -3,10 +3,12 @@ if (process.env.NODE_ENV != "production") {
 }
 
 const express = require("express");
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const authRoute = require("./routes/AuthRoute");
 
 const dbUrl = process.env.MONGO_URL;
 const { HoldingsModel } = require("./model/HoldingsModel");
@@ -27,8 +29,17 @@ async function main() {
   await mongoose.connect(dbUrl);
 }
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+app.use(cookieParser());
+app.use(express.json());
+
+app.use("/", authRoute);
 
 app.get("/allHoldings", async (req, res) => {
   let allHoldings = await HoldingsModel.find({});
