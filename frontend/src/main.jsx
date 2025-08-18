@@ -11,6 +11,7 @@ import SupportPage from './landing_page/support/SupportPage.jsx'
 import PageNotFound from './landing_page/PageNotFound.jsx'
 import Navbar from './landing_page/Navbar.jsx'
 import Footer from './landing_page/Footer.jsx'
+import Login from './landing_page/signup/Login.jsx'
 
 createRoot(document.getElementById('root')).render(
 
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
     <Routes>
       <Route path='/'  element={<HomePage/>}/>
       <Route path='/signup'  element={<SignUp/>}/>
+      <Route path='/login'  element={<Login/>}/>
       <Route path='/about'  element={<AboutPage/>}/>
       <Route path='/product'  element={<ProductPage/>}/>
       <Route path='/pricing'  element={<PricingPage/>}/>

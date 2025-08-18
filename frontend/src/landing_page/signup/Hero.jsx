@@ -114,7 +114,7 @@ function Hero() {
           </form>
           <p style={{ color: "gray", fontSize: "0.75rem" }}>
             By proceeding, you agree to the Zerodha <Link> terms</Link> &{" "}
-            <Link>privacy policy</Link>
+            <Link>privacy policy</Link> <Link to="/login">privacy policy</Link>
           </p>
         </div>
       </div>
