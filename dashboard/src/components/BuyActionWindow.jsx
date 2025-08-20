@@ -19,16 +19,12 @@ const BuyActionWindow = ({ uid }) => {
   const handleBuyClick = () => {
     if (isDisabled) return;
 
-    axios.post(
-      "http://localhost:8080/newOrder" ||
-        "https://trading-app-project.onrender.com/newOrder",
-      {
-        name: uid,
-        qty: stockQuantity,
-        price: stockPrice,
-        mode: "BUY",
-      }
-    );
+    axios.post("https://trading-app-project.onrender.com/newOrder", {
+      name: uid,
+      qty: stockQuantity,
+      price: stockPrice,
+      mode: "BUY",
+    });
 
     GeneralContext.closeBuyWindow();
   };

@@ -31,8 +31,6 @@ async function main() {
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
       "https://fintradeapp.netlify.app",
       "https://dashboard-finverse.netlify.app/",
     ],

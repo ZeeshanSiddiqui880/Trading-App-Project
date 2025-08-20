@@ -32,8 +32,7 @@ function Hero() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/signup" ||
-          "https://trading-app-project.onrender.com/signup",
+        "https://trading-app-project.onrender.com/signup",
         {
           email,
           password,
@@ -50,9 +49,7 @@ function Hero() {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href =
-            "http://localhost:5174" ||
-            (window.location.href = "https://dashboard-finverse.netlify.app/");
+          window.location.href = "https://dashboard-finverse.netlify.app/";
         }, 1000);
       } else {
         handleError(message);

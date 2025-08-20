@@ -25,12 +25,10 @@ const Menu = () => {
   useEffect(() => {
     const verifyCookie = async () => {
       if (!cookies.token) {
-        (window.location.href = "http://localhost:5173/login") ||
-          (window.location.href =
-            "https://fintradeapp.netlify.app/login");
+        window.location.href = "https://fintradeapp.netlify.app/login";
       }
       const { data } = await axios.post(
-        "http://localhost:8080" || "https://trading-app-project.onrender.com",
+        "https://trading-app-project.onrender.com",
         {},
         { withCredentials: true }
       );
@@ -45,12 +43,7 @@ const Menu = () => {
       } else if (!status) {
         removeCookie("token");
 
-        const signupUrl =
-          window.location.hostname === "localhost"
-            ? "http://localhost:5173/signup"
-            : "https://fintradeapp.netlify.app/signup";
-
-        window.location.href = signupUrl;
+        window.location.href = "https://fintradeapp.netlify.app/signup";
       }
     };
     verifyCookie();
@@ -58,9 +51,7 @@ const Menu = () => {
 
   const Logout = () => {
     removeCookie("token", { path: "/" });
-    (window.location.href = "http://localhost:5173/login") ||
-      (window.location.href =
-        "https://fintradeapp.netlify.app/login");
+    window.location.href = "https://fintradeapp.netlify.app/login";
   };
 
   const menuClass = "menu";

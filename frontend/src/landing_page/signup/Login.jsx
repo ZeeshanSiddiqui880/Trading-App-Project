@@ -30,8 +30,7 @@ function Login() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/login" ||
-          "https://trading-app-project.onrender.com/login",
+        "https://trading-app-project.onrender.com/login",
         {
           ...inputValue,
         },
@@ -42,9 +41,7 @@ function Login() {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href =
-            "http://localhost:5174" ||
-            (window.location.href = "https://dashboard-finverse.netlify.app/");
+          window.location.href = "https://dashboard-finverse.netlify.app/";
         }, 1000);
       } else {
         handleError(message);
