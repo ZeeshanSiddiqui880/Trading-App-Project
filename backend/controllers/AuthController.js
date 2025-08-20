@@ -13,19 +13,22 @@ module.exports.Signup = async (req, res, next) => {
     }
 
     const salt = await bcrypt.genSalt(10);
-const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-
-    const user = await UsersModel.create({ email, password:hashedPassword, username, createdAt });
+    const user = await UsersModel.create({
+      email,
+      password: hashedPassword,
+      username,
+      createdAt,
+    });
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: true,
-      secure : process.env.NODE_ENV === "production",
-      sameSite:"Lax"
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Lax",
     });
     console.log(user);
-    
 
     res
       .status(201)
@@ -33,5 +36,33 @@ const hashedPassword = await bcrypt.hash(password, salt);
     next();
   } catch (error) {
     console.log(error);
+  }
+};
+
+module.exports.Login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.json({ message: "All fields are required" });
+    }
+    const user = await UsersModel.findOne({ email });
+    if (!user) {
+      return res.json({ message: "Incorrect password or email" });
+    }
+    const auth = await bcrypt.compare(password, user.password);
+    if (!auth) {
+      return res.json({ message: "Incorrect password or email" });
+    }
+    const token = createSecretToken(user._id);
+    res.cookie("token", token, {
+      withCredentials: true,
+      httpOnly: false,
+    });
+    res
+      .status(201)
+      .json({ message: "User logged in successfully", success: true });
+    next();
+  } catch (error) {
+    console.error(error);
   }
 };

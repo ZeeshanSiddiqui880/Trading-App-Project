@@ -1,13 +1,9 @@
 function Hero() {
-  return ( 
+  return (
     <section className="container-fluid" id="supportHero">
       <div className="  p-5" id="supportWrapper">
-        <h1 >
-          Support Portal
-        </h1>
-        <a href="">
-          Track Tickets
-        </a>
+        <h1>Support Portal</h1>
+        <a href="">Track Tickets</a>
       </div>
       <div className="row p-5 m-3">
         <div className="col-6 p-5">
@@ -21,21 +17,15 @@ function Hero() {
           <a href="">Kite user manual</a>
         </div>
         <div className="col-6 p-5">
-          <h1 className="fs-3">
-            Featured
-          </h1>
-         <ol>
-          <li>
-            Current Takeovers and Delisting - January 2024
-          </li>
-          <li>
-            Latest Intraday leverages - MIS & CO
-          </li>
-         </ol>
+          <h1 className="fs-3">Featured</h1>
+          <ol>
+            <li>Current Takeovers and Delisting - January 2024</li>
+            <li>Latest Intraday leverages - MIS & CO</li>
+          </ol>
         </div>
       </div>
     </section>
-   );
+  );
 }
 
 export default Hero;

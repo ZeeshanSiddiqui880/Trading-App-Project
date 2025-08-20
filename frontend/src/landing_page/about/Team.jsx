@@ -1,23 +1,25 @@
+import "./Team.css";
+
 function Team() {
   return (
-    <div className="container">
+    <div className="container team-container">
       <div className="row p-3 mt-5">
-        <h1 className="text-center">People</h1>
+        <h1 className="text-center fs-3">People</h1>
       </div>
       <div
-        className="row p-3 text-muted fs-6"
+        className="row p-3 text-muted fs-6 team-text"
         style={{ lineHeight: "1.8", fontSize: "1.2em" }}
       >
-        <div className="col-6 p-3 text-center">
+        <div className="col-12 col-md-6 p-3 text-center mb-4 mb-md-0">
           <img
             src="media/images/nithinKamath.jpg"
-            alt="Founder"
-            style={{ width: "50%", borderRadius: "100%" }}
+            alt="Founder Nithin Kamath"
+            className="team-image"
           />
-          <h4 className="mt-5">Nithin Kamath</h4>
+          <h4 className="mt-4">Nithin Kamath</h4>
           <h6>Founder, CEO</h6>
         </div>
-        <div className="col-6 p-3">
+        <div className="col-12 col-md-6 p-3 ">
           <p>
             Nithin bootstrapped and founded Zerodha in 2010 to overcome the
             hurdles he faced during his decade long stint as a trader. Today,
@@ -28,7 +30,20 @@ function Team() {
             (SMAC) and the Market Data Advisory Committee (MDAC).
           </p>
           <p>Playing basketball is his zen.</p>
-          <p>Connect on Homepage / TradingQnA / Twitter</p>
+          <p>
+            Connect on{" "}
+            <a href="#" style={{ textDecoration: "none" }}>
+              Homepage
+            </a>{" "}
+            /{" "}
+            <a href="#" style={{ textDecoration: "none" }}>
+              TradingQnA
+            </a>{" "}
+            /{" "}
+            <a href="#" style={{ textDecoration: "none" }}>
+              Twitter
+            </a>
+          </p>
         </div>
       </div>
     </div>

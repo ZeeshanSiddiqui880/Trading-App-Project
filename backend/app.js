@@ -6,7 +6,6 @@ const express = require("express");
 const port = process.env.PORT || 8080;
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/AuthRoute");
 
@@ -31,7 +30,12 @@ async function main() {
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://merry-bienenstitch-1247f9.netlify.app/",
+      "https://dashboard-finverse.netlify.app/",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -61,7 +65,7 @@ app.post("/newOrder", async (req, res) => {
       mode: req.body.mode,
     });
 
-    await newOrder.save(); // ✅ wait for the DB operation to finish
+    await newOrder.save();
     res.status(201).send("✅ New order saved successfully.");
   } catch (err) {
     console.error("❌ Error saving order:", err);

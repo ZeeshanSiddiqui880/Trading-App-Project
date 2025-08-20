@@ -1,0 +1,26 @@
+@media (max-width: 768px) {
+  .investment-grid {
+    grid-template-columns: 1fr !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 10px !important;
+  }
+
+  .investment-grid-item {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center;
+  }
+
+  .investment-grid-item img {
+    margin-bottom: 15px;
+  }
+
+  .investment-button {
+    width: 100% !important;
+  }
+}
+
+p {
+  text-align: start;
+}

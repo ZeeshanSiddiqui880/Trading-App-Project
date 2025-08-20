@@ -1,3 +1,5 @@
+import "./Investments.css";
+
 function Investments() {
   return (
     <div className="container" style={{ padding: "100px" }}>
@@ -8,7 +10,9 @@ function Investments() {
         >
           Investment options with Zerodha demat account
         </h2>
+
         <div
+          className="investment-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
@@ -20,10 +24,10 @@ function Investments() {
             marginBottom: "30px",
           }}
         >
-          <div style={{ display: "flex" }}>
+          <div className="investment-grid-item" style={{ display: "flex" }}>
             <img
               style={{ width: "112px" }}
-              src=" media\images\stocks-acop.svg"
+              src="media/images/stocks-acop.svg"
             />
             <div style={{ marginLeft: "25px" }}>
               <h3 style={{ fontSize: "20px", lineHeight: "1.6" }}>Stocks</h3>
@@ -32,12 +36,9 @@ function Investments() {
               </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
-            <img
-              src="media\images\mf-acop.svg"
-              style={{ width: "112px" }}
-              alt=""
-            />
+
+          <div className="investment-grid-item" style={{ display: "flex" }}>
+            <img style={{ width: "112px" }} src="media/images/mf-acop.svg" />
             <div style={{ marginLeft: "25px" }}>
               <h3 style={{ fontSize: "20px", lineHeight: "1.6" }}>
                 Mutual funds
@@ -47,31 +48,23 @@ function Investments() {
               </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
-            <img
-              style={{ width: "112px" }}
-              src="media\images\ipo-acop.svg"
-              alt=""
-            />
+
+          <div className="investment-grid-item" style={{ display: "flex" }}>
+            <img style={{ width: "112px" }} src="media/images/ipo-acop.svg" />
             <div style={{ marginLeft: "25px" }}>
               <h3 style={{ fontSize: "20px", lineHeight: "1.6" }}>IPO</h3>
-
               <p style={{ fontSize: "16px", marginTop: "5px", color: "#666" }}>
                 Apply to the latest IPOs instantly <br /> via UPI
               </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
-            <img
-              style={{ width: "112px" }}
-              src="media\images\fo-acop.svg"
-              alt=""
-            />
+
+          <div className="investment-grid-item" style={{ display: "flex" }}>
+            <img style={{ width: "112px" }} src="media/images/fo-acop.svg" />
             <div style={{ marginLeft: "25px" }}>
               <h3 style={{ fontSize: "20px", lineHeight: "1.6" }}>
                 Futures & options
               </h3>
-
               <p style={{ fontSize: "16px", marginTop: "5px", color: "#666" }}>
                 Hedge and mitigate market risk <br /> through simplified F&O
                 trading
@@ -81,7 +74,7 @@ function Investments() {
         </div>
 
         <button
-          className="p-2 btn btn-primary fs-5 mb-5 mt-3"
+          className="p-2 btn btn-primary fs-5 mb-5 mt-3 investment-button"
           style={{
             width: "20%",
             margin: "0 auto",

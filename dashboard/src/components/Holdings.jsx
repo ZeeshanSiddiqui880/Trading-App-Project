@@ -1,5 +1,4 @@
 import React from "react";
-// import { holdings } from "../data/data";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -7,10 +6,15 @@ const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/allHoldings").then((res) => {
-      console.log(res.data);
-      setAllHoldings(res.data);
-    });
+    axios
+      .get(
+        "http://localhost:8080/allHoldings" ||
+          "https://trading-app-project.onrender.com/allHoldings"
+      )
+      .then((res) => {
+        console.log(res.data);
+        setAllHoldings(res.data);
+      });
   }, []);
   return (
     <>

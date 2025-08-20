@@ -30,7 +30,8 @@ function Login() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/auth/login",
+        "http://localhost:8080/login" ||
+          "https://trading-app-project.onrender.com/login",
         {
           ...inputValue,
         },
@@ -41,7 +42,9 @@ function Login() {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "http://localhost:5174";
+          window.location.href =
+            "http://localhost:5174" ||
+            (window.location.href = "https://dashboard-finverse.netlify.app/");
         }, 1000);
       } else {
         handleError(message);
@@ -61,6 +64,13 @@ function Login() {
       <div className="login-container">
         <form onSubmit={handleSubmit} className="login-form">
           <h1 className="login-title">Login</h1>
+          <div style={{ textAlign: "center" }}>
+            <img
+              src="media/images/logokite.png"
+              alt="Kite Logo"
+              style={{ width: "60px" }}
+            />
+          </div>
           <p className="login-subtitle">
             Welcome back! Please login to your account.
           </p>

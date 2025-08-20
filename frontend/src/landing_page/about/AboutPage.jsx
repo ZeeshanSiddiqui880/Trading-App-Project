@@ -2,10 +2,10 @@ import Hero from "./Hero.jsx";
 import Team from "./Team.jsx";
 
 function AboutPage() {
-  return (  
+  return (
     <>
-      <Hero/>
-      <Team/>
+      <Hero />
+      <Team />
     </>
   );
 }

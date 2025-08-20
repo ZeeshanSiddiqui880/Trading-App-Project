@@ -1,5 +1,5 @@
 function Steps() {
-  return ( <p>a</p> );
+  return <p>a</p>;
 }
 
 export default Steps;

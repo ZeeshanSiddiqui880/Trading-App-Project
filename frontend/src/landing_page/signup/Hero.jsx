@@ -1,16 +1,39 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "./HeroSignup.css";
+
 function Hero() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [inputValue, setInputValue] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const { username, email, password } = inputValue;
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
+  };
+  const handleError = (err) =>
+    toast.error(err, {
+      position: "bottom-left",
+    });
+  const handleSuccess = (msg) =>
+    toast.success(msg, {
+      position: "bottom-left",
+    });
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/signup",
+        "http://localhost:8080/signup" ||
+          "https://trading-app-project.onrender.com/signup",
         {
           email,
           password,
@@ -21,52 +44,61 @@ function Hero() {
           withCredentials: true,
         }
       );
-      console.log(response.data);
+      console.log(response);
+      const { success, message } = response.data;
+
+      if (success) {
+        handleSuccess(message);
+        setTimeout(() => {
+          window.location.href =
+            "http://localhost:5174" ||
+            (window.location.href = "https://dashboard-finverse.netlify.app/");
+        }, 1000);
+      } else {
+        handleError(message);
+      }
     } catch (error) {
       console.error("signup error", error);
     }
+    setInputValue({
+      username: "",
+      email: "",
+      password: "",
+    });
   };
   return (
-    <div className="container ">
-      <div
-        className="row text-center"
-        style={{ padding: "90px", paddingBottom: "40px" }}
-      >
-        <h1 style={{ fontSize: "30px" }}>
-          Open a free demat and trading account online
-        </h1>
-        <p style={{ fontSize: "1.3rem" }} className="text-muted mt-3">
-          Start investing brokerage free and join a community of 1.6+ crore
-          investors and traders
-        </p>
-      </div>
-      <div
-        className="row"
-        style={{
-          padding: "20px 40px 0 40px",
-          marginRight: "70px",
-          marginLeft: "70px",
-        }}
-      >
-        <div className="col-6 p-5">
-          <img
-            src=" media\images\account_open.svg"
-            style={{ width: "500px" }}
-          />
+    <>
+      <ToastContainer />
+      <div className="container py-5">
+        <div className="text-center mb-5 px-3">
+          <h1 className="fs-3">Open a free demat and trading account online</h1>
+          <p className="text-muted fs-5 mt-3">
+            Start investing brokerage free and join a community of 1.6+ crore
+            investors and traders
+          </p>
         </div>
-        <div className="col-6 p-5 " style={{ marginTop: "10px" }}>
-          <form >
-            <h1 style={{ fontSize: "1.5rem" }}>Signup now</h1>
-            <p
-              style={{ fontSize: "16px", color: "#9b9b9b", fontWeight: "400" }}
-              className="text-muted mt-3"
-            >
-              Or track your existing application
-            </p>
-            <div className="row">
+
+        <div className="row align-items-center g-5">
+          <div className="col-12 col-md-6 text-center">
+            <img
+              src="media/images/account_open.svg"
+              alt="Signup Illustration"
+              className="img-fluid"
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+          </div>
+
+          <div className="col-12 col-md-6">
+            <form onSubmit={handleSubmit}>
+              <h2 className="fs-4 mb-3">Signup now</h2>
+              <p className="text-muted" style={{ fontSize: "1rem" }}>
+                Or track your existing application
+              </p>
+
               <div className="form-floating mb-3">
                 <input
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={handleOnChange}
+                  value={username}
                   type="text"
                   name="username"
                   className="form-control"
@@ -78,7 +110,8 @@ function Hero() {
 
               <div className="form-floating mb-3">
                 <input
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleOnChange}
+                  value={email}
                   type="email"
                   className="form-control"
                   name="email"
@@ -88,9 +121,10 @@ function Hero() {
                 <label htmlFor="email">Enter valid Email:</label>
               </div>
 
-              <div className="form-floating">
+              <div className="form-floating mb-4">
                 <input
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handleOnChange}
+                  value={password}
                   type="password"
                   name="password"
                   className="form-control"
@@ -99,26 +133,27 @@ function Hero() {
                 />
                 <label htmlFor="password">Password:</label>
               </div>
-            </div>
-            <button
-              className="p-2 btn btn-primary fs-5 mb-5 mt-3"
-              style={{
-                width: "50%",
-                margin: "0 auto",
-                backgroundColor: "#387ed1",
-              }}
-              onSubmit={handleSubmit}
-            >
-              Signup
-            </button>
-          </form>
-          <p style={{ color: "gray", fontSize: "0.75rem" }}>
-            By proceeding, you agree to the Zerodha <Link> terms</Link> &{" "}
-            <Link>privacy policy</Link> <Link to="/login">privacy policy</Link>
-          </p>
+
+              <button
+                type="submit"
+                className="btn btn-primary w-100 p-2 fs-5"
+                style={{ backgroundColor: "#387ed1" }}
+              >
+                Signup
+              </button>
+            </form>
+
+            <p className="mt-3 text-muted" style={{ fontSize: "0.85rem" }}>
+              By proceeding, you agree to the Zerodha <Link>terms</Link> &{" "}
+              <Link>privacy policy</Link>.{" "}
+              <Link to="/login" className="ms-2 highlight-login">
+                Login
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

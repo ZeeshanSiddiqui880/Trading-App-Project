@@ -5,10 +5,15 @@ import { Link } from "react-router-dom";
 const Orders = () => {
   const [allOrders, setAllOrders] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8080/allOrders").then((res) => {
-      console.log(res.data);
-      setAllOrders(res.data);
-    });
+    axios
+      .get(
+        "http://localhost:8080/allOrders" ||
+          "https://trading-app-project.onrender.com/allOrders"
+      )
+      .then((res) => {
+        console.log(res.data);
+        setAllOrders(res.data);
+      });
   }, []);
   return (
     <>

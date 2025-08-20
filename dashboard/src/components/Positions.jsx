@@ -1,5 +1,4 @@
 import React from "react";
-// import { positions } from "../data/data";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -7,10 +6,15 @@ const Positions = () => {
   const [allPositions, setAllPositions] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/allPositions").then((res) => {
-      console.log(res.data);
-      setAllPositions(res.data);
-    });
+    axios
+      .get(
+        "http://localhost:8080/allPositions" ||
+          "https://trading-app-project.onrender.com/allPositions"
+      )
+      .then((res) => {
+        console.log(res.data);
+        setAllPositions(res.data);
+      });
   }, []);
 
   return (

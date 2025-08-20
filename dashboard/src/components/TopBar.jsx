@@ -1,11 +1,12 @@
 import React from "react";
-
+import { CookiesProvider } from "react-cookie";
+import ReactDOM from "react-dom/client";
 import Menu from "./Menu";
 
 const TopBar = () => {
   return (
     <div className="topbar-container">
-      <div className="indices-container">
+      <div className="indices-container mt-3">
         <div className="nifty">
           <p className="index">NIFTY 50</p>
           <p className="index-points">{100.2} </p>
@@ -18,7 +19,9 @@ const TopBar = () => {
         </div>
       </div>
 
-      <Menu />
+      <CookiesProvider>
+        <Menu />
+      </CookiesProvider>
     </div>
   );
 };

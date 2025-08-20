@@ -75,11 +75,6 @@ const WatchListActions = ({ uid }) => {
     }
   };
 
-  // const handleBuyClick = () => {
-  //   console.log(generalContext.openBuyWindow(uid));
-
-  //   generalContext.openBuyWindow(uid)
-  // };
   return (
     <span className="actions">
       <span>
