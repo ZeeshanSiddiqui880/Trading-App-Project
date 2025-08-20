@@ -26,6 +26,7 @@ const Menu = () => {
     const verifyCookie = async () => {
       if (!cookies.token) {
         window.location.href = "https://fintradeapp.netlify.app/login";
+        return;
       }
       const { data } = await axios.post(
         "https://trading-app-project.onrender.com",
@@ -44,10 +45,11 @@ const Menu = () => {
         removeCookie("token");
 
         window.location.href = "https://fintradeapp.netlify.app/signup";
+        return
       }
     };
     verifyCookie();
-  }, [cookies, navigate, removeCookie]);
+  }, [cookies.token]);
 
   const Logout = () => {
     removeCookie("token", { path: "/" });
