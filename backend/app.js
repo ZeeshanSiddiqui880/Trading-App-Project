@@ -33,7 +33,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:5174",
-      "https://merry-bienenstitch-1247f9.netlify.app/",
+      "https://fintradeapp.netlify.app",
       "https://dashboard-finverse.netlify.app/",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],

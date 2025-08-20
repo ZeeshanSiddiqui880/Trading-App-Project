@@ -27,7 +27,7 @@ const Menu = () => {
       if (!cookies.token) {
         (window.location.href = "http://localhost:5173/login") ||
           (window.location.href =
-            "https://merry-bienenstitch-1247f9.netlify.app/login");
+            "https://fintradeapp.netlify.app/login");
       }
       const { data } = await axios.post(
         "http://localhost:8080" || "https://trading-app-project.onrender.com",
@@ -48,7 +48,7 @@ const Menu = () => {
         const signupUrl =
           window.location.hostname === "localhost"
             ? "http://localhost:5173/signup"
-            : "https://merry-bienenstitch-1247f9.netlify.app/signup";
+            : "https://fintradeapp.netlify.app/signup";
 
         window.location.href = signupUrl;
       }
@@ -60,7 +60,7 @@ const Menu = () => {
     removeCookie("token", { path: "/" });
     (window.location.href = "http://localhost:5173/login") ||
       (window.location.href =
-        "https://merry-bienenstitch-1247f9.netlify.app/login");
+        "https://fintradeapp.netlify.app/login");
   };
 
   const menuClass = "menu";
