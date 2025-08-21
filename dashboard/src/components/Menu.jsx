@@ -22,70 +22,38 @@ const Menu = () => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [username, setUsername] = useState("");
-  // useEffect(() => {
-  //   const verifyCookie = async () => {
-  //     const token = localStorage.getItem("token");
-  //     if (!token) {
-  //       window.location.href = "https://fintradeapp.netlify.app/login";
-  //       return;
-  //     }
-  //     try {
-  //       const { data } = await axios.post(
-  //         "https://trading-app-project.onrender.com/verify",
-  //         {},
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-
-  //       if (data.success) {
-  //         setUsername(data.user.username);
-  //         toast(`${data.user.username.toUpperCase()}`, {
-  //           position: "top-right",
-  //         });
-  //       } else {
-  //         localStorage.removeItem("token");
-
-  //         window.location.href = "https://fintradeapp.netlify.app/signup";
-  //         return;
-  //       }
-  //     } catch (err) {
-  //       localStorage.removeItem("token");
-  //       window.location.href = "https://fintradeapp.netlify.app/login";
-  //     }
-  //   };
-  //   verifyCookie();
-  // }, []);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      return (window.location.href = "https://fintradeapp.netlify.app/login");
-    }
-
-    axios
-      .post(
-        "https://trading-app-project.onrender.com/verify-token",
+    const verifyCookie = async () => {
+      if (!cookies.token) {
+        navigate("/login");
+        return;
+      }
+      const { data } = await axios.post(
+        "https://trading-app-project.onrender.com",
         {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then(({ data }) => {
-        if (data.success) {
-          setUsername(data.user.username);
-        } else {
-          throw new Error("Invalid token");
-        }
-      })
-      .catch(() => {
-        localStorage.removeItem("token");
-        window.location.href = "https://fintradeapp.netlify.app/login";
-      });
-  }, []);
+        { withCredentials: true }
+      );
+      const { status, user } = data;
+      setUsername(user);
+
+      if (status && !toastShown.current) {
+        toastShown.current = true;
+        toast(`${user.toUpperCase()}`, {
+          position: "top-right",
+        });
+      } else if (!status) {
+        removeCookie("token");
+
+        window.location.href = "https://fintradeapp.netlify.app/signup";
+        return;
+      }
+    };
+    verifyCookie();
+  }, [cookies.token, navigate, removeCookie]);
 
   const Logout = () => {
     removeCookie("token", { path: "/" });
-    window.location.href = "https://fintradeapp.netlify.app/login";
+    navigate("/login");
   };
 
   const menuClass = "menu";

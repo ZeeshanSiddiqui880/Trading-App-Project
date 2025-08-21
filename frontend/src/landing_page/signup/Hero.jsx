@@ -49,7 +49,7 @@ function Hero() {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "https://dashboard-finverse.netlify.app/";
+          window.location.href = "https://dashboard-finverse.netlify.app/login";
         }, 1000);
       } else {
         handleError(message);
