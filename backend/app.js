@@ -32,12 +32,13 @@ app.use(
   cors({
     origin: [
       "https://fintradeapp.netlify.app",
-      "https://dashboard-finverse.netlify.app/",
+      "https://dashboard-finverse.netlify.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 app.use(cookieParser());
 app.use(express.json());
 

@@ -64,7 +64,7 @@ function Login() {
           <h1 className="login-title">Login</h1>
           <div style={{ textAlign: "center" }}>
             <img
-              src="media/images/logokite.png"
+              src="/logokite.png"
               alt="Kite Logo"
               style={{ width: "60px" }}
             />
