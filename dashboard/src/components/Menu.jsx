@@ -45,7 +45,7 @@ const Menu = () => {
         removeCookie("token");
 
         window.location.href = "https://fintradeapp.netlify.app/signup";
-        return
+        return;
       }
     };
     verifyCookie();
