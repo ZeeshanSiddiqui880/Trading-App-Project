@@ -12,7 +12,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Home />} />
+      <Route path="/dashboard/*" element={<Home />} />
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/*" element={<Navigate to="/login" replace />} />
     </Routes>
