@@ -17,3 +17,18 @@ module.exports.userVerification = (req, res) => {
     }
   });
 };
+
+module.exports.VerifyToken = (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ success: false, message: "Token missing" });
+  }
+
+  const token = authHeader.split(" ")[1];
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    res.status(200).json({ success: true, user });
+  } catch (err) {
+    res.status(401).json({ success: false, message: "Invalid token" });
+  }
+};

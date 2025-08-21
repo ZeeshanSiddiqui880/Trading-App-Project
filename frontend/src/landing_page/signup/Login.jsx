@@ -37,8 +37,10 @@ function Login() {
         { withCredentials: true }
       );
       console.log(data);
-      const { success, message } = data;
+      const { success, message, token, user } = data;
       if (success) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("username", user.username);
         handleSuccess(message);
         setTimeout(() => {
           window.location.href = "https://dashboard-finverse.netlify.app/";

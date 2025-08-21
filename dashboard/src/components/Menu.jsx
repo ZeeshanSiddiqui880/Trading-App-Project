@@ -24,32 +24,40 @@ const Menu = () => {
   const [username, setUsername] = useState("");
   useEffect(() => {
     const verifyCookie = async () => {
-      if (!cookies.token) {
+      const token = localStorage.getItem("token");
+      if (!token) {
         window.location.href = "https://fintradeapp.netlify.app/login";
         return;
       }
-      const { data } = await axios.post(
-        "https://trading-app-project.onrender.com",
-        {},
-        { withCredentials: true }
-      );
-      const { status, user } = data;
-      setUsername(user);
+      try {
+        const { data } = await axios.post(
+          "https://trading-app-project.onrender.com/verify",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      if (status && !toastShown.current) {
-        toastShown.current = true;
-        toast(`${user.toUpperCase()}`, {
-          position: "top-right",
-        });
-      } else if (!status) {
-        removeCookie("token");
+        if (data.success) {
+          setUsername(data.user.username);
+          toast(`${data.user.username.toUpperCase()}`, {
+            position: "top-right",
+          });
+        } else {
+          localStorage.removeItem("token");
 
-        window.location.href = "https://fintradeapp.netlify.app/signup";
-        return;
+          window.location.href = "https://fintradeapp.netlify.app/signup";
+          return;
+        }
+      } catch (err) {
+        localStorage.removeItem("token");
+        window.location.href = "https://fintradeapp.netlify.app/login";
       }
     };
     verifyCookie();
-  }, [cookies.token]);
+  }, []);
 
   const Logout = () => {
     removeCookie("token", { path: "/" });
