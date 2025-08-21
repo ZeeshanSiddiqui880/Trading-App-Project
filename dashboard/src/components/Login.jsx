@@ -25,6 +25,7 @@ function Login() {
     toast.success(msg, {
       position: "bottom-left",
     });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,7 +65,7 @@ function Login() {
           <h1 className="login-title">Login</h1>
           <div style={{ textAlign: "center" }}>
             <img
-              src="/logokite.png"
+              src="\logo.png"
               alt="Kite Logo"
               style={{ width: "60px" }}
             />

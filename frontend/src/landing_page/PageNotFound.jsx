@@ -10,7 +10,7 @@ function PageNotFound() {
           Kiaan couldn’t find that page
         </h1>
 
-        <p>
+        <p className="text-center">
           We couldn’t find the page you were looking for. <br /> Visit{" "}
           <Link to="/"> Zerodha’s home page </Link>
         </p>

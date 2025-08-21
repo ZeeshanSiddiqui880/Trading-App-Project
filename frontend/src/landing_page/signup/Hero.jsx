@@ -143,9 +143,14 @@ function Hero() {
             <p className="mt-3 text-muted" style={{ fontSize: "0.85rem" }}>
               By proceeding, you agree to the Zerodha <Link>terms</Link> &{" "}
               <Link>privacy policy</Link>.{" "}
-              <Link to="/login" className="ms-2 highlight-login">
+              <a
+                href="https://dashboard-finverse.netlify.app/login"
+                className="ms-2 highlight-login"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Login
-              </Link>
+              </a>
             </p>
           </div>
         </div>
