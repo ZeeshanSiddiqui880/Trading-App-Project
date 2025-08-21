@@ -82,7 +82,7 @@ const Menu = () => {
               <li>
                 <Link
                   style={{ textDecoration: "none" }}
-                  to="/orders"
+                  to="/dashboard/orders"
                   onClick={() => handleMenuClick(1)}
                 >
                   <p
@@ -95,7 +95,7 @@ const Menu = () => {
               <li>
                 <Link
                   style={{ textDecoration: "none" }}
-                  to="/holdings"
+                  to="/dashboard/holdings"
                   onClick={() => handleMenuClick(2)}
                 >
                   <p
@@ -108,7 +108,7 @@ const Menu = () => {
               <li>
                 <Link
                   style={{ textDecoration: "none" }}
-                  to="/positions"
+                  to="/dashboard/positions"
                   onClick={() => handleMenuClick(3)}
                 >
                   <p
@@ -121,7 +121,7 @@ const Menu = () => {
               <li>
                 <Link
                   style={{ textDecoration: "none" }}
-                  to="/funds"
+                  to="/dashboard/funds"
                   onClick={() => handleMenuClick(4)}
                 >
                   <p
@@ -134,7 +134,7 @@ const Menu = () => {
               <li>
                 <Link
                   style={{ textDecoration: "none" }}
-                  to="/logout"
+                  to="/dashboard/logout"
                   onClick={Logout}
                 >
                   <p
