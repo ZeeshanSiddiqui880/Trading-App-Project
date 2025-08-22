@@ -7,7 +7,8 @@ const Holdings = () => {
 
   useEffect(() => {
     axios
-      .get("https://trading-app-project.onrender.com/allHoldings")
+      // .get("https://trading-app-project.onrender.com/allHoldings")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/allHoldings`)
       .then((res) => {
         console.log(res.data);
         setAllHoldings(res.data);

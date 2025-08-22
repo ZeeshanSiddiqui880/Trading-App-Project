@@ -27,35 +27,66 @@ function Login() {
     });
   const navigate = useNavigate();
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const { data } = await axios.post(
+  //       `${import.meta.env.VITE_BACKEND_URL}/login`,
+  //       // "https://trading-app-project.onrender.com/login",
+  //       {
+  //         ...inputValue,
+  //       },
+  //       { withCredentials: true }
+  //     );
+  //     console.log(data);
+  //     const { success, message } = data;
+  //     if (success) {
+  //       handleSuccess(message);
+  //       setTimeout(() => {
+  //         navigate("/dashboard");
+  //       }, 1000);
+  //     } else {
+  //       handleError(message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   setInputValue({
+  //     ...inputValue,
+  //     email: "",
+  //     password: "",
+  //   });
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(
-        "https://trading-app-project.onrender.com/login",
-        {
-          ...inputValue,
-        },
-        { withCredentials: true }
-      );
-      console.log(data);
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 1000);
-      } else {
-        handleError(message);
-      }
-    } catch (error) {
-      console.log(error);
+  e.preventDefault();
+  try {
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/login`,
+      {
+        ...inputValue,
+      },
+      { withCredentials: false }
+    );
+    const { success, message, token } = data;
+    if (success && token) {
+      localStorage.setItem("authToken", token);  // Save token here
+      handleSuccess(message);
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
+    } else {
+      handleError(message);
     }
-    setInputValue({
-      ...inputValue,
-      email: "",
-      password: "",
-    });
-  };
+  } catch (error) {
+    console.error(error);
+  }
+
+  setInputValue({
+    email: "",
+    password: "",
+  });
+};
 
   return (
     <>
@@ -64,11 +95,7 @@ function Login() {
         <form onSubmit={handleSubmit} className="login-form">
           <h1 className="login-title">Login</h1>
           <div style={{ textAlign: "center" }}>
-            <img
-              src="\logo.png"
-              alt="Kite Logo"
-              style={{ width: "60px" }}
-            />
+            <img src="\logo.png" alt="Kite Logo" style={{ width: "60px" }} />
           </div>
           <p className="login-subtitle">
             Welcome back! Please login to your account.

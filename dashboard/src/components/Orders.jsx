@@ -6,7 +6,9 @@ const Orders = () => {
   const [allOrders, setAllOrders] = useState([]);
   useEffect(() => {
     axios
-      .get("https://trading-app-project.onrender.com/allOrders")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/allOrders`
+        // ,"https://trading-app-project.onrender.com"
+      )
       .then((res) => {
         console.log(res.data);
         setAllOrders(res.data);

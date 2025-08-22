@@ -22,34 +22,73 @@ const Menu = () => {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [username, setUsername] = useState("");
+  // useEffect(() => {
+  //   const verifyCookie = async () => {
+  //     if (!cookies.token) {
+  //       navigate("/login");
+  //       return;
+  //     }
+  //     const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}`,
+  //       // "https://trading-app-project.onrender.com",
+  //       {},
+  //       { withCredentials: true }
+  //     );
+  //     const { status, user } = data;
+  //     setUsername(user);
+
+  //     if (status && !toastShown.current) {
+  //       toastShown.current = true;
+  //       toast(`${user.toUpperCase()}`, {
+  //         position: "top-right",
+  //       });
+  //     } else if (!status) {
+  //       removeCookie("token");
+
+  //       // window.location.href = "https://fintradeapp.netlify.app/signup";
+  //       window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signup`;
+  //       return;
+  //     }
+  //   };
+  //   verifyCookie();
+  // }, [cookies.token, navigate, removeCookie]);
+
   useEffect(() => {
     const verifyCookie = async () => {
-      if (!cookies.token) {
-        navigate("/login");
-        return;
-      }
-      const { data } = await axios.post(
-        "https://trading-app-project.onrender.com",
-        {},
-        { withCredentials: true }
-      );
-      const { status, user } = data;
-      setUsername(user);
+      try {
+        if (!cookies.token) {
+          navigate("/login");
+          return;
+        }
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}`,
+          {}, // empty body, your backend should verify token from cookies
+          { withCredentials: true }
+        );
+        const { status, user } = data;
 
-      if (status && !toastShown.current) {
-        toastShown.current = true;
-        toast(`${user.toUpperCase()}`, {
-          position: "top-right",
-        });
-      } else if (!status) {
+        if (status) {
+          setUsername(user);
+          if (!toastShown.current) {
+            toastShown.current = true;
+            toast(`${user.toUpperCase()}`, { position: "top-right" });
+          }
+        } else {
+          removeCookie("token");
+          window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signup`;
+        }
+      } catch (error) {
+        console.error("Verification error:", error);
         removeCookie("token");
-
-        window.location.href = "https://fintradeapp.netlify.app/signup";
-        return;
+        navigate("/login");
       }
     };
     verifyCookie();
   }, [cookies.token, navigate, removeCookie]);
+
+  // const Logout = () => {
+  //   removeCookie("token", { path: "/" });
+  //   navigate("/login");
+  // };
 
   const Logout = () => {
     removeCookie("token", { path: "/" });
@@ -64,12 +103,12 @@ const Menu = () => {
       <img className="p-2" src="logo.png" style={{ width: "50px" }} />
       <div className="container-fluid d-flex justify-content-end">
         <div className="menus ">
-          <div className="menu-container mt-3">
+          <div className="menu-container  ">
             <ul>
               <li>
                 <Link
                   style={{ textDecoration: "none" }}
-                  to="/"
+                  to="/dashboard"
                   onClick={() => handleMenuClick(0)}
                 >
                   <p
@@ -147,7 +186,7 @@ const Menu = () => {
             </ul>
             <hr />
             <div className="profile" onClick={handleProfileClick}>
-              <div className="avatar mb-3">
+              <div className="avatar  ">
                 {String(username).charAt(0).toUpperCase()}
               </div>
               <p className="username">{String(username).toLocaleUpperCase()}</p>

@@ -7,7 +7,9 @@ const Positions = () => {
 
   useEffect(() => {
     axios
-      .get("https://trading-app-project.onrender.com/allPositions")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/allPositions`
+        // "https://trading-app-project.onrender.com/allPositions"
+      )
       .then((res) => {
         console.log(res.data);
         setAllPositions(res.data);

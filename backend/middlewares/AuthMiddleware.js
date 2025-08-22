@@ -17,18 +17,22 @@ module.exports.userVerification = (req, res) => {
     }
   });
 };
-
-module.exports.VerifyToken = (req, res) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ success: false, message: "Token missing" });
-  }
-
-  const token = authHeader.split(" ")[1];
+ 
+module.exports.verifyUser = async (req, res) => {
   try {
-    const user = jwt.verify(token, process.env.JWT_SECRET);
-    res.status(200).json({ success: true, user });
-  } catch (err) {
-    res.status(401).json({ success: false, message: "Invalid token" });
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    const user = await UsersModel.findById(decoded.id);
+    if (!user) {
+      return res.status(401).json({ message: "Invalid token" });
+    }
+
+    res.status(200).json({ status: true, user: user.username });
+  } catch (error) {
+    res.status(401).json({ message: "Unauthorized", error });
   }
 };

@@ -31,8 +31,8 @@ function Hero() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://trading-app-project.onrender.com/signup",
+      const response = await axios.post(  `${import.meta.env.VITE_BACKEND_URL}/signup`,
+        // "https://trading-app-project.onrender.com/signup",
         {
           email,
           password,
@@ -49,7 +49,8 @@ function Hero() {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "https://dashboard-finverse.netlify.app/login";
+          window.location.href = `${import.meta.env.VITE_DASHBOARD_URL}/login`;
+          // window.location.href = "https://dashboard-finverse.netlify.app/login";
         }, 1000);
       } else {
         handleError(message);
@@ -144,7 +145,8 @@ function Hero() {
               By proceeding, you agree to the Zerodha <Link>terms</Link> &{" "}
               <Link>privacy policy</Link>.{" "}
               <a
-                href="https://dashboard-finverse.netlify.app/login"
+                // href="https://dashboard-finverse.netlify.app/login"
+                href={`${import.meta.env.VITE_DASHBOARD_URL}/login`}
                 className="ms-2 highlight-login"
                 target="_blank"
                 rel="noopener noreferrer"

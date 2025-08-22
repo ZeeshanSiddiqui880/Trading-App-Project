@@ -30,10 +30,7 @@ async function main() {
 
 app.use(
   cors({
-    origin: [
-      "https://fintradeapp.netlify.app",
-      "https://dashboard-finverse.netlify.app",
-    ],
+    origin: [process.env.FRONTEND_URL, process.env.DASHBOARD_URL],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

@@ -19,7 +19,8 @@ const BuyActionWindow = ({ uid }) => {
   const handleBuyClick = () => {
     if (isDisabled) return;
 
-    axios.post("https://trading-app-project.onrender.com/newOrder", {
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/newOrder`, {
+    // axios.post("https://trading-app-project.onrender.com/newOrder", {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,
