@@ -146,7 +146,7 @@ function Hero() {
               <Link>privacy policy</Link>.{" "}
               <a
                 // href="https://dashboard-finverse.netlify.app/login"
-                href={`${import.meta.env.VITE_DASHBOARD_URL}/login`}
+                href={`${import.meta.env.VITE_DASHBOARD_URL}/auth/login`}
                 className="ms-2 highlight-login"
                 target="_blank"
                 rel="noopener noreferrer"

@@ -7,7 +7,7 @@ const express = require("express");
 const router = express.Router();
 
 // router.post("/", userVerification);
-router.post("/", verifyUser);
+router.post("/auth", verifyUser);
 router.post("/signup", Signup);
 router.post("/login", Login);
 

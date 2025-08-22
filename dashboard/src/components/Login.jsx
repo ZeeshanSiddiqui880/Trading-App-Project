@@ -62,7 +62,7 @@ function Login() {
   e.preventDefault();
   try {
     const { data } = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/login`,
+      `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
       {
         ...inputValue,
       },
@@ -70,7 +70,7 @@ function Login() {
     );
     const { success, message, token } = data;
     if (success && token) {
-      localStorage.setItem("authToken", token);  // Save token here
+      localStorage.setItem("authToken", token);  
       handleSuccess(message);
       setTimeout(() => {
         navigate("/dashboard");

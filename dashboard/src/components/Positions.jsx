@@ -7,7 +7,7 @@ const Positions = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/allPositions`
+      .get(`${import.meta.env.VITE_BACKEND_URL}/auth/allPositions`
         // "https://trading-app-project.onrender.com/allPositions"
       )
       .then((res) => {
